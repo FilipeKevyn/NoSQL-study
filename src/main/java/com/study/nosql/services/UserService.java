@@ -1,6 +1,7 @@
 package com.study.nosql.services;
 
 import com.study.nosql.domain.User;
+import com.study.nosql.domain.dto.UserDTO;
 import com.study.nosql.exceptions.UserNotFoundException;
 import com.study.nosql.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,10 @@ public class UserService {
 
     public User findById(String id){
         return repository.findById(id).orElseThrow(() -> new UserNotFoundException("User com " + id + "não encontrado"));
+    }
+
+    public User insert(UserDTO userDTO){
+        User user = new User(userDTO);
+        return repository.insert(user);
     }
 }
