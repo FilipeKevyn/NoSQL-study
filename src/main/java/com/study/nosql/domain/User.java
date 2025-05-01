@@ -1,5 +1,6 @@
 package com.study.nosql.domain;
 
+import com.study.nosql.domain.dto.UserDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,10 +15,18 @@ public class User implements Serializable {
     private String name;
     private String email;
 
+    public User(){}
+
     public User(String id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    public User(UserDTO userDTO){
+        this.id = userDTO.id();
+        this.name = userDTO.name();
+        this.email = userDTO.email();
     }
 
     public String getId() {
