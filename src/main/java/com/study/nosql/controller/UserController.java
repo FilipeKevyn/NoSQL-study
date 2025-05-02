@@ -1,6 +1,7 @@
 package com.study.nosql.controller;
 
 import com.study.nosql.domain.User;
+import com.study.nosql.domain.dto.PostDTO;
 import com.study.nosql.domain.dto.UserDTO;
 import com.study.nosql.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(dtoResponse);
     }
 
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<PostDTO>> findPosts(@PathVariable String id){
+        User user = service.findById(id);
+        List<PostDTO> dtoList = user.getPosts().stream()
+                .map(post -> new PostDTO(post.getId(), post.getTitle(), post.getBody(), user.getName()))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok().body(dtoList);
+    }
 }
