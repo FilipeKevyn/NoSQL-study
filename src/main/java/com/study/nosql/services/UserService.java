@@ -19,7 +19,7 @@ public class UserService {
     }
 
     public User findById(String id){
-        return repository.findById(id).orElseThrow(() -> new UserNotFoundException("User com " + id + "não encontrado"));
+        return repository.findById(id).orElseThrow(() -> new UserNotFoundException());
     }
 
     public User insert(UserDTO userDTO){
