@@ -1,5 +1,6 @@
 package com.study.nosql.exceptions.handler;
 
+import com.study.nosql.exceptions.PostNotFoundException;
 import com.study.nosql.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,5 +14,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     private ResponseEntity<String> userNotFoundException(UserNotFoundException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    }
+
+    @ExceptionHandler(PostNotFoundException.class)
+    private ResponseEntity<String> postNotFoundException(PostNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
     }
 }
